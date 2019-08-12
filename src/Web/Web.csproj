@@ -47,6 +47,9 @@
     <None Include="wwwroot\images\products\9.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app.yaml">
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </Content>
     <Content Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
