@@ -1,0 +1,45 @@
+resources:
+- repo: self
+  fetchDepth: 1
+queue:
+  name: Hosted Ubuntu 1604
+trigger:
+- testing
+variables:
+  TargetFramework: 'netcoreapp2.2'
+  Solutions: '**/*.sln'
+  RestoreBuildProjects: 'src/**/*.csproj'
+  TestProjects: 'test/**/*.csproj'
+  BuildConfiguration: 'Release'
+  DockerImageName: 'firstdemo-dp-172/musicstore'
+steps:
+- task: NuGetToolInstaller@1
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(Solutions)'
+- task: DotNetCoreCLI@2
+  displayName: Restore
+  inputs:
+    command: restore
+    projects: '$(RestoreBuildProjects)'
+    feedsToUse: config
+    nugetConfigPath: NuGet.config
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    projects: '$(RestoreBuildProjects)'
+    arguments: '--configuration $(BuildConfiguration) --framework=$(TargetFramework)'
+- task: DotNetCoreCLI@2
+  displayName: Test
+  inputs:
+    command: test
+    projects: '$(TestProjects)'
+    arguments: '--configuration $(BuildConfiguration) --framework=$(TargetFramework)'
+- task: DotNetCoreCLI@2
+  displayName: Publish
+  inputs:
+    command: publish
+    publishWebProjects: True
+    arguments: '--configuration $(BuildConfiguration) --framework=$(TargetFramework)'
+    zipAfterPublish: false
+    modifyOutputPath: false
