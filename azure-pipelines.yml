@@ -8,7 +8,7 @@ trigger:
 variables:
   TargetFramework: 'netcoreapp2.2'
   Solutions: '**/*.sln'
-  RestoreBuildProjects: 'src/**/*.csproj'
+  RestoreBuildProjects: 'src/Web/*.csproj'
   TestProjects: 'test/**/*.csproj'
   BuildConfiguration: 'Release'
   DockerImageName: 'firstdemo-dp-172/musicstore'
