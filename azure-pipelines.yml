@@ -12,6 +12,12 @@ variables:
   BuildConfiguration: 'Release'
   DockerImageName: 'firstdemo-dp-172/musicstore'
 steps:
+- task: UseDotNet@2
+  displayName: 'Install DotNetCoreCLI'
+  inputs:
+    packageType: sdk
+    version: 2.2.401
+    installationPath: $(Agent.ToolsDirectory)/dotnet
 - task: DotNetCoreCLI@2
   displayName: Restore
   inputs:
