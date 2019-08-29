@@ -7,11 +7,16 @@ trigger:
 - testing
 variables:
   TargetFramework: 'netcoreapp2.2'
+  Solutions: '**/*.sln'
   RestoreBuildProjects: 'src/**/*.csproj'
   TestProjects: 'test/**/*.csproj'
   BuildConfiguration: 'Release'
   DockerImageName: 'firstdemo-dp-172/musicstore'
 steps:
+- task: NuGetToolInstaller@1
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(Solutions)'
 - task: DotNetCoreCLI@2
   displayName: Restore
   inputs:
