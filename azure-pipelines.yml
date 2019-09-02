@@ -4,7 +4,7 @@ resources:
 queue:
   name: Hosted Ubuntu 1604
 trigger:
-- testing
+- azure-test-1
 variables:
   TargetFramework: 'netcoreapp2.2'
   Solutions: '**/*.sln'
